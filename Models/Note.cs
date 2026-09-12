@@ -7,6 +7,7 @@ public class Note
     public DateTimeOffset CreationTime { get; set; }
 
     // Foreign key to the note type
-    public int NoteTypeId { get; set; }
-    public NoteType NoteType { get; set; } = null;
+    public int TypeId { get; set; }
+    public TypeItem Type { get; set; } = null;
+    public List<TaskItem> Tasks { get; set; } = new();
 }
