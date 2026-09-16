@@ -1,6 +1,6 @@
 namespace TaskManager.Api.Models;
 
-public class TaskItem
+public class TaskItem: ITrackable
 {
     public int Id { get; set; }
     public string Description { get; set; } = string.Empty;

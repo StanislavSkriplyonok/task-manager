@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using TaskManager.Api.Models;
 
-namespace MovieCatalog.Api.Data;
+namespace TaskManager.Api.Data;
 
 public class AppDbContext : DbContext
 {
@@ -34,5 +34,24 @@ public class AppDbContext : DbContext
             .WithMany(s => s.Tasks)
             .HasForeignKey(t => t.StatusId)
             .OnDelete(DeleteBehavior.Restrict); // prevent deleting
+    }
+
+    public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+    {
+        AddTimestamps();
+        return base.SaveChangesAsync(cancellationToken);
+    }
+
+
+    private void AddTimestamps()
+    {
+        var entries = ChangeTracker
+            .Entries()
+            .Where(e => e.Entity is ITrackable && e.State == EntityState.Added);
+
+        foreach (var entry in entries)
+        {
+            ((ITrackable)entry.Entity).CreationTime = DateTimeOffset.UtcNow;
+        }
     }
 }

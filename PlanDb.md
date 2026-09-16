@@ -1,12 +1,11 @@
 ## Notes
 - Id
-- Title
+- Name
 - CreationTime
 - TypeId (FK -> Type)
 
 ## Tasks
 - Id
-- Title
 - Description
 - CreationTime
 - NoteId (FK -> Note)
