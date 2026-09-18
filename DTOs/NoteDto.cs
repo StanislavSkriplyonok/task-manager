@@ -19,7 +19,6 @@ public class CreateNoteDto
 
     [Required(ErrorMessage = "Type is required")]
     public int TypeId { get; set; }
-    public List<int> TaskIds { get; set; } = new();
 }
 
 public class UpdateNoteDto
@@ -30,5 +29,4 @@ public class UpdateNoteDto
 
     [Required(ErrorMessage = "Type is required")]
     public int TypeId { get; set; }
-    public List<int> TaskIds { get; set; } = new();
 }

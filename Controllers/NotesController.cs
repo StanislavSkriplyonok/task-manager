@@ -52,10 +52,6 @@ public class NotesController : ControllerBase
 
         var note = dto.ToEntity();
 
-        note.Tasks = await _context.Tasks
-            .Where(t => dto.TaskIds.Contains(t.Id))
-            .ToListAsync();
-
         _context.Notes.Add(note);
         await _context.SaveChangesAsync();
 
@@ -77,10 +73,6 @@ public class NotesController : ControllerBase
 
         note.Name = dto.Name;
         note.TypeId = dto.TypeId;
-
-        note.Tasks = await _context.Tasks
-            .Where(t => dto.TaskIds.Contains(t.Id))
-            .ToListAsync();
 
         await _context.SaveChangesAsync();
 
