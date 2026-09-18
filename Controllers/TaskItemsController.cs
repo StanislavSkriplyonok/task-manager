@@ -18,7 +18,7 @@ public class TaskItemsController : ControllerBase
         _context = context;
     }
 
-    // GET: api/types
+    // GET: api/tasks
     [HttpGet]
     public async Task<ActionResult<IEnumerable<TaskItemDto>>> GetTaskItems()
     {
@@ -30,7 +30,7 @@ public class TaskItemsController : ControllerBase
         return tasks.Select(t => t.ToDto()).ToList();
     }
 
-    // GET: api/types/1
+    // GET: api/tasks/1
     [HttpGet("{id}")]
     public async Task<ActionResult<TaskItemDto>> GetTaskItem(int id)
     {
@@ -42,7 +42,7 @@ public class TaskItemsController : ControllerBase
         return task.ToDto();
     }
 
-    // POST: api/types
+    // POST: api/tasks
     [HttpPost]
     public async Task<ActionResult<TaskItemDto>> CreateTaskItem(CreateTaskItemDto dto)
     {
@@ -65,7 +65,7 @@ public class TaskItemsController : ControllerBase
         return CreatedAtAction(nameof(GetTaskItem), new { id = task.Id }, task.ToDto());
     }
 
-    // PUT: api/types/1
+    // PUT: api/tasks/1
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateTaskItem(int id, UpdateTaskItemDto dto)
     {
@@ -83,7 +83,7 @@ public class TaskItemsController : ControllerBase
         return NoContent();
     }
 
-    // DELETE: api/types/1
+    // DELETE: api/tasks/1
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteTaskItem(int id)
     {
