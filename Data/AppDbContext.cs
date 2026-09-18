@@ -14,6 +14,21 @@ public class AppDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Status>().HasData(
+            new Status { Id = 1, Name = "To Do" },  
+            new Status { Id = 2, Name = "In Progress" },
+            new Status { Id = 3, Name = "Completed" },
+            new Status { Id = 4, Name = "Cancelled" }
+        );
+
+        modelBuilder.Entity<TypeItem>().HasData(
+            new TypeItem { Id = 1, Name = "Work" },
+            new TypeItem { Id = 2, Name = "Study" },
+            new TypeItem { Id = 3, Name = "Entertainment" },
+            new TypeItem { Id = 4, Name = "Other" }
+        );
+
+
         // Note -> Type: one-to-many
         modelBuilder.Entity<Note>()
             .HasOne(n => n.Type)
