@@ -11,6 +11,7 @@ public class AppDbContext : DbContext
     public DbSet<TaskItem> Tasks { get; set; }
     public DbSet<TypeItem> Types { get; set; }
     public DbSet<Status> Statuses { get; set; }
+    public DbSet<User> Users { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -49,6 +50,19 @@ public class AppDbContext : DbContext
             .WithMany(s => s.Tasks)
             .HasForeignKey(t => t.StatusId)
             .OnDelete(DeleteBehavior.Restrict); // prevent deleting
+
+        // User: unique constraints + enum stored as string
+        modelBuilder.Entity<User>()
+            .HasIndex(u => u.Username)
+            .IsUnique();
+
+        modelBuilder.Entity<User>()
+            .HasIndex(u => u.Email)
+            .IsUnique();
+
+        modelBuilder.Entity<User>()
+            .Property(u => u.Role)
+            .HasConversion<string>(); // stores "User"/"Admin" instead of 0/1
     }
 
     public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
