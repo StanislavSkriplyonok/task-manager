@@ -1,9 +1,10 @@
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TaskManager.Api.Data;
 using TaskManager.Api.DTOs;
-using TaskManager.Api.Models;
 using TaskManager.Api.Mapping;
+using TaskManager.Api.Models;
 
 namespace TaskManager.Api.Controllers;
 
@@ -71,8 +72,7 @@ public class NotesController : ControllerBase
         if (!typeExists)
             return BadRequest("Type not found");
 
-        note.Name = dto.Name;
-        note.TypeId = dto.TypeId;
+        note.UpdateEntity(dto);
 
         await _context.SaveChangesAsync();
 

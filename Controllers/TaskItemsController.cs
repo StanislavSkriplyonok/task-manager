@@ -76,8 +76,7 @@ public class TaskItemsController : ControllerBase
         if (!statusExists)
             return BadRequest("Status not found");
 
-        task.Description = dto.Description;
-        task.StatusId = dto.StatusId;
+        task.UpdateEntity(dto);
         await _context.SaveChangesAsync();
 
         return NoContent();
